@@ -35,10 +35,44 @@ class LoginController extends GetxController {
         DialogHelper.hideLoading();
 
         userData.value = UserDataModel.fromJson(response.data);
-        print(userData.value.data!.acctype.toString());
-        saveUserLoginSession(
-            accType: userData.value.data!.acctype.toString(), isLoggedIn: true);
-        await Get.offAll(const DashBoardScreen());
+
+        if (userData.value.status == 'false') {
+          Get.defaultDialog(
+            title: 'Not Approved',
+            middleText: userData.value.message.toString(),
+            titleStyle: const TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            middleTextStyle: const TextStyle(
+              fontFamily: "Nunito",
+              color: Colors.black87,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+            confirm: ElevatedButton(
+              onPressed: () {
+                Get.back();
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  )),
+              child: const Text('ok'),
+            ),
+          );
+        } else {
+          saveUserLoginSession(
+              accType: userData.value.data!.acctype.toString(),
+              isLoggedIn: true,
+              id: userData.value.data!.id.toString());
+          await Get.offAll(DashBoardScreen(
+            accType: userData.value.data!.acctype.toString(),
+          ));
+        }
       }
     } catch (e) {
       print(e.toString());
@@ -67,7 +101,6 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         DialogHelper.hideLoading();
         userSignin.value = UserSignin.fromJson(response.data);
-        print(userSignin.value!.message.toString());
         if (userSignin.value!.message.toString() ==
             'User created succcessfully') {
           Get.defaultDialog(
@@ -133,9 +166,11 @@ class LoginController extends GetxController {
   }
 
   Future<void> saveUserLoginSession(
-      {required bool isLoggedIn, required String accType}) async {
+      {required bool isLoggedIn,
+      required String accType,
+      required String id}) async {
     await sessionlog.setBool('isLoggedIn', isLoggedIn);
     await sessionlog.setString('isAdmin', accType);
-    // print("${a.toString()}=============================");
+    await sessionlog.setString('userId', id);
   }
 }

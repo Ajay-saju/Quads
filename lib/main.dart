@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       home: sessionlog.getBool('isLoggedIn') == null
           ? const LoginScreen()
-          : const DashBoardScreen(),
+          :  DashBoardScreen(accType: sessionlog.getString('isAdmin').toString(),),
     );
   }
 }

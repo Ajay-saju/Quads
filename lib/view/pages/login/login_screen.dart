@@ -7,6 +7,7 @@ import 'package:quads/view/pages/login/signup_screen.dart';
 import '../../../controller/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
+  
   const LoginScreen({super.key});
 
   @override
@@ -49,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   loginController.emailController.text,
                                   loginController.passwordController.text);
                             }
-                            print(loginController.emailController.text);
+                            
                           },
                           child: const Text('Submit'))
                     ],

@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:quads/controller/dashboard_controller.dart';
 import 'package:quads/main.dart';
 import 'package:quads/view/pages/login/login_screen.dart';
+import 'package:quads/view/pages/projects/projects_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
-  const DashBoardScreen({super.key});
+  final String accType;
+  const DashBoardScreen({super.key, required this.accType});
 
   @override
   State<DashBoardScreen> createState() => _DashBoardScreenState();
@@ -15,7 +17,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   DashboardController dashboardController = Get.put(DashboardController());
   @override
   Widget build(BuildContext context) {
-    print(dashboardController.accType.toString());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quads'),
@@ -23,7 +24,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         backgroundColor: const Color(0xff764abc),
       ),
       drawer: Drawer(
-          child: dashboardController.accType == 'admin'
+          child: widget.accType == 'admin'
               ? ListView(
                   children: [
                     const DrawerHeader(
@@ -47,7 +48,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
                       title: const Text('Projects'),
                       onTap: () {
-                        // Navigator.pop(context);
+                        Get.to(const ProjectsScreen());
                       },
                     ),
                     ListTile(
