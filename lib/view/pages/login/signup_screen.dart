@@ -22,28 +22,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Center(
           child: Form(
-              key: loginController.loginFormKey,
+              key: loginController.signinFormKey,
               child: Column(
                 children: [
                   TextFormField(
                     controller: loginController.nameController,
                     validator: (value) => validateName(value!),
+                    decoration: const InputDecoration(hintText: 'Name'),
                   ),
                   AppSize.kSizedBox20h,
                   TextFormField(
                     controller: loginController.phoneController,
                     validator: (value) => validateMobile(value!),
+                    decoration: const InputDecoration(hintText: 'Phone Number'),
                   ),
                   AppSize.kSizedBox20h,
                   TextFormField(
-                    // controller: loginController.emailController,
-                    validator: (value) => validateEmail(value!),
+                    controller: loginController.emailController,
+                    // validator: (value) => validateEmail(value!),
+                    decoration: const InputDecoration(hintText: 'Email'),
                   ),
                   AppSize.kSizedBox20h,
                   TextFormField(
-                      // controller: loginController.passwordController,
-                      ),
-                  ElevatedButton(onPressed: () {}, child: const Text('Submit'))
+                    controller: loginController.passwordController,
+                    decoration: const InputDecoration(hintText: 'password'),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (loginController.signinFormKey.currentState!
+                            .validate()) {
+                          loginController.signinFormKey.currentState!.save();
+
+                          loginController.creteNewuser(
+                            email: loginController.emailController.text,
+                            name: loginController.nameController.text,
+                            password: loginController.passwordController.text,
+                            phone: loginController.phoneController.text,
+                          );
+                        } else {
+                          print('error in input');
+                        }
+                      },
+                      child: const Text('Submit'))
                 ],
               )),
         ),

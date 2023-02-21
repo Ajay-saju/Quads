@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:quads/view/pages/dashboard/dashboard_screen.dart';
 import 'package:quads/view/pages/login/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'binding/binding.dart';
-
-void main() {
+late SharedPreferences sessionlog;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  sessionlog = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -21,7 +24,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: sessionlog.getBool('isLoggedIn') == null
+          ? const LoginScreen()
+          : const DashBoardScreen(),
     );
   }
 }
