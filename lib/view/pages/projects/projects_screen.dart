@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:quads/view/constants/app_constants.dart';
 import 'package:quads/view/constants/validations.dart';
 import 'package:quads/view/pages/projects/add_new_project_screen.dart';
+import 'package:quads/view/pages/projects/project_details_screen.dart';
 
 import '../../../controller/projects_controller.dart';
 
@@ -70,10 +71,22 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
         rows: List<DataRow>.generate(
             data.length,
             (index) => DataRow(cells: [
-                  DataCell(Text(data[index].projectName)),
-                  DataCell(Text(data[index].address ?? '')),
-                  DataCell(Text(data[index].city ?? '')),
-                  DataCell(Text(data[index].createdOn))
+                  DataCell(Text(data[index].projectName),
+                      onTap: () => Get.to(ProjectDetailsScreen(
+                            projectName: data[index].projectName,
+                          ))),
+                  DataCell(Text(data[index].address ?? ''),
+                      onTap: () => Get.to(ProjectDetailsScreen(
+                            projectName: data[index].projectName,
+                          ))),
+                  DataCell(Text(data[index].city ?? ''),
+                      onTap: () => Get.to(ProjectDetailsScreen(
+                            projectName: data[index].projectName,
+                          ))),
+                  DataCell(Text(data[index].createdOn),
+                      onTap: () => Get.to(ProjectDetailsScreen(
+                            projectName: data[index].projectName,
+                          )))
                 ])));
   }
 
@@ -83,23 +96,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
       const DataColumn(label: Text('City')),
       const DataColumn(label: Text('Address')),
       const DataColumn(label: Text('Created on'))
-    ];
-  }
-
-  List<DataRow> _createRows(data) {
-    return [
-      DataRow(cells: [
-        DataCell(Text('#100')),
-        DataCell(Text('Flutter Basics')),
-        DataCell(Text('David John')),
-        DataCell(Text('David John'))
-      ]),
-      DataRow(cells: [
-        DataCell(Text('#101')),
-        DataCell(Text('Dart Internals')),
-        DataCell(Text('Alex Wick')),
-        DataCell(Text('Alex Wick'))
-      ])
     ];
   }
 }
