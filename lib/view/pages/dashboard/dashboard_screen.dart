@@ -4,6 +4,9 @@ import 'package:quads/controller/dashboard_controller.dart';
 import 'package:quads/main.dart';
 import 'package:quads/view/pages/login/login_screen.dart';
 import 'package:quads/view/pages/projects/projects_screen.dart';
+import 'package:quads/view/pages/user_approval/user_approval_screen.dart';
+
+import '../add_user/add_user_screen.dart';
 
 class DashBoardScreen extends StatefulWidget {
   final String accType;
@@ -57,7 +60,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
                       title: const Text('Add user'),
                       onTap: () {
-                        // Navigator.pop(context);
+                        Get.to(const AddUserScreen());
                       },
                     ),
                     ListTile(
@@ -65,9 +68,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         Icons.home,
                       ),
                       title: const Text('Permission'),
-                      onTap: () {
-                        // Navigator.pop(context);
-                      },
+                      onTap: () {},
                     ),
                     ListTile(
                       leading: const Icon(
@@ -75,7 +76,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       ),
                       title: const Text('User Approval'),
                       onTap: () {
-                        // Navigator.pop(context);
+                        Get.to(const UserApprovalScreen());
                       },
                     ),
                     ListTile(

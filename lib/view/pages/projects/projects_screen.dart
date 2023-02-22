@@ -37,28 +37,40 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                   strokeWidth: 2.5,
                 ),
               )
-            : SafeArea(
-                child: Center(
-                child: Column(
-                  children: [
-                    AppSize.kSizedBox10h,
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Add Project'),
-                    ),
-                    AppSize.kSizedBox20h,
-                    SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: createDataTable(projectsController.getAllProjectsModel.value.data))
-                  ],
-                ),
-              ));
+            : SingleChildScrollView(
+                child: SafeArea(
+                    child: Center(
+                  child: Column(
+                    children: [
+                      AppSize.kSizedBox10h,
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: const Text('Add Project'),
+                      ),
+                      AppSize.kSizedBox20h,
+                      SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: createDataTable(projectsController
+                              .getAllProjectsModel.value.data))
+                    ],
+                  ),
+                )),
+              );
       }),
     );
   }
 
   DataTable createDataTable(data) {
-    return DataTable(columns: _createColumns(), rows: _createRows());
+    return DataTable(
+        columns: _createColumns(),
+        rows: List<DataRow>.generate(
+            data.length,
+            (index) => DataRow(cells: [
+                  DataCell(Text(data[index].projectName)),
+                  DataCell(Text(data[index].address ?? '')),
+                  DataCell(Text(data[index].city ?? '')),
+                  DataCell(Text(data[index].createdOn))
+                ])));
   }
 
   List<DataColumn> _createColumns() {
@@ -70,7 +82,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     ];
   }
 
-  List<DataRow> _createRows() {
+  List<DataRow> _createRows(data) {
     return [
       DataRow(cells: [
         DataCell(Text('#100')),
