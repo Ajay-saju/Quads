@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:quads/base_api/orginal_api.dart';
 
-class PostApprovalService {
+import '../base_api/orginal_api.dart';
+
+class AddProjectService {
   static OrginalApi orginalApi = OrginalApi();
   final dio = Dio(BaseOptions(
       baseUrl: orginalApi.baseUrl, responseType: ResponseType.json));
-
-  Future<Response> postApproval(data) async {
+  Future<Response> postNewProject(data) async {
     try {
       Response response = await dio.post(
-        'AdminController/approve_userLogin',
+        'AdminController/add_project',
         data: data,
         options: Options(
           headers: {'Content-Type': 'application/json'},

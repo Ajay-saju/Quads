@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quads/view/constants/app_constants.dart';
+import 'package:quads/view/constants/validations.dart';
+import 'package:quads/view/pages/projects/add_new_project_screen.dart';
 
 import '../../../controller/projects_controller.dart';
 
@@ -44,7 +46,9 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                     children: [
                       AppSize.kSizedBox10h,
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          Get.to(const AddNewProjectScreen());
+                        },
                         child: const Text('Add Project'),
                       ),
                       AppSize.kSizedBox20h,

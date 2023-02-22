@@ -24,6 +24,7 @@ class UserApprovalController extends GetxController {
     } catch (e) {
       print(e.toString());
     }
+    update();
   }
 
   Future acceptApproval(
@@ -31,12 +32,14 @@ class UserApprovalController extends GetxController {
     DialogHelper.showLoading();
     PostApprovalService postApprovalService = PostApprovalService();
     Map approval = {'id': id, 'userApprove': isApproved};
+    print(approval);
     String jsonStr = jsonEncode(approval);
+    print(jsonStr);
     try {
       var reponse = await postApprovalService.postApproval(jsonStr);
       if (reponse.statusCode == 200) {
         print(reponse.data);
-
+        getAllApprovals();
         DialogHelper.hideLoading();
       }
     } catch (e) {

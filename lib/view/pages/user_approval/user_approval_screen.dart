@@ -40,11 +40,24 @@ class _UserApprovalScreenState extends State<UserApprovalScreen> {
               )
             : SingleChildScrollView(
                 child: SafeArea(
-                    child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: createDataTable(
-                      userApprovalController.getUserApprovalModel.value!.data),
-                )),
+                    child: userApprovalController
+                                .getUserApprovalModel.value!.data ==
+                            null
+                        ? Center(
+                            child: Column(
+                              children: const [
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                Text('No pending approvals'),
+                              ],
+                            ),
+                          )
+                        : SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: createDataTable(userApprovalController
+                                .getUserApprovalModel.value!.data),
+                          )),
               );
       }),
     );
@@ -66,6 +79,7 @@ class _UserApprovalScreenState extends State<UserApprovalScreen> {
                       id: data[index].id,
                       isApproved: 'accept',
                     );
+                    // userApprovalController.update();
                   },
                   child: const Text('Accept'),
                 )),
@@ -75,6 +89,7 @@ class _UserApprovalScreenState extends State<UserApprovalScreen> {
                       id: data[index].id,
                       isApproved: 'decline',
                     );
+                    // userApprovalController.update();
                   },
                   child: const Text('Decline'),
                 )),

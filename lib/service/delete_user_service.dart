@@ -1,20 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:quads/base_api/orginal_api.dart';
 
-class PostApprovalService {
+class DeleteUserService {
   static OrginalApi orginalApi = OrginalApi();
   final dio = Dio(BaseOptions(
       baseUrl: orginalApi.baseUrl, responseType: ResponseType.json));
 
-  Future<Response> postApproval(data) async {
+  Future<Response> deleteUser(String id) async {
     try {
-      Response response = await dio.post(
-        'AdminController/approve_userLogin',
-        data: data,
-        options: Options(
-          headers: {'Content-Type': 'application/json'},
-        ),
-      );
+      Response response = await dio.delete('AdminController/delete_user/$id');
       return response;
     } on DioError catch (e) {
       print(e.message);

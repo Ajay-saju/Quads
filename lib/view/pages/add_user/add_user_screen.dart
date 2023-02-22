@@ -76,7 +76,9 @@ class _AddUserScreenState extends State<AddUserScreen> {
                     child: const Text('Edit'),
                   )),
                   DataCell(ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      addUserController.deleteUser(data[index].id);
+                    },
                     child: const Text('Delete'),
                   )),
                 ])));
