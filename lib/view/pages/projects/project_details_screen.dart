@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:quads/view/pages/daily_updates/daily_update_tabview_widget.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectName;
@@ -29,7 +28,18 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
             Text('Tasks'),
           ]),
         ),
+        body: TabBarView(children: [
+          DailyUpdateTabView(),
+          Text('one'),
+          Text('one'),
+          Text('one'),
+          Text('one'),
+          Text('one'),
+          Text('one'),
+        ]),
       ),
     );
   }
 }
+
+
