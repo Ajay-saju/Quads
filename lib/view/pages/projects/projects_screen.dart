@@ -20,7 +20,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   void initState() {
     // TODO: implement initState
 
-    projectsController.getAllProjects();
+    projectsController.getAllProjects('1');
   }
 
   @override
@@ -56,7 +56,11 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                       SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: createDataTable(projectsController
-                              .getAllProjectsModel.value.data))
+                              .getAllProjectsModel.value.data)),
+                      AppSize.kSizedBox20h,
+                      Row(children: [
+                        
+                      ],)
                     ],
                   ),
                 )),

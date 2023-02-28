@@ -38,7 +38,7 @@ class ProjectsController extends GetxController {
     try {
       var response = await addProjectService.postNewProject(data);
       if (response.statusCode == 200) {
-        getAllProjects();
+        getAllProjects('1');
         DialogHelper.hideLoading();
       }
     } catch (e) {
@@ -49,9 +49,9 @@ class ProjectsController extends GetxController {
 
   Rx<GetAllProjects> getAllProjectsModel = GetAllProjects().obs;
   GetAllProjectService getAllProjectService = GetAllProjectService();
-  Future getAllProjects() async {
+  Future getAllProjects(pageNO) async {
     try {
-      var response = await getAllProjectService.getAllProject();
+      var response = await getAllProjectService.getAllProject('1');
       if (response.statusCode == 200) {
         getAllProjectsModel.value = GetAllProjects.fromJson(response.data);
         isLoading.value = false;
