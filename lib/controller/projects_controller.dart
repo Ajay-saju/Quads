@@ -16,6 +16,24 @@ class ProjectsController extends GetxController {
   final cityController = TextEditingController();
 
   var isLoading = true.obs;
+  var isLoadingMore = false.obs;
+
+  var projetectData = [].obs;
+
+  ScrollController controller = ScrollController();
+  var listLength = 10.obs;
+
+  // addItems() async {
+  //   controller.addListener(() {
+  //     if (controller.position.maxScrollExtent == controller.position.pixels) {
+  //       for (int i = 0; i < 2; i++) {
+  //         listLength++;
+  //         list.add(Model(name: (listLength).toString()));
+  //         update();
+  //       }
+  //     }
+  //   });
+  // }
 
   Future createNewUser(
       {required String name,
@@ -48,12 +66,22 @@ class ProjectsController extends GetxController {
   }
 
   Rx<GetAllProjects> getAllProjectsModel = GetAllProjects().obs;
+
   GetAllProjectService getAllProjectService = GetAllProjectService();
   Future getAllProjects(pageNO) async {
+    // isLoading.value = true;
+    // var isLoading = true.obs;
     try {
-      var response = await getAllProjectService.getAllProject('1');
+      var response = await getAllProjectService.getAllProject(pageNO);
       if (response.statusCode == 200) {
         getAllProjectsModel.value = GetAllProjects.fromJson(response.data);
+        if (pageNO == '1') {
+          projetectData.value = getAllProjectsModel.value.data!.toList();
+          print(projetectData.value.length);
+        } else {
+          // ignore: invalid_use_of_protected_member
+          projetectData.value.addAll(getAllProjectsModel.value.data!.toList());
+        }
         isLoading.value = false;
       }
     } catch (e) {

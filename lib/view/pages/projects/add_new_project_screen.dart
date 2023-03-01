@@ -15,6 +15,7 @@ class AddNewProjectScreen extends StatefulWidget {
 
 class _AddNewProjectScreenState extends State<AddNewProjectScreen> {
   final projectsController = Get.find<ProjectsController>();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

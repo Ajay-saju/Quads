@@ -20,7 +20,6 @@ class DashboardController extends GetxController {
       if (response.statusCode == 200) {
         isLoading.value = false;
         getDashBordModel.value = GetDashBordModel.fromJson(response.data);
-        print(getDashBordModel.value!.data![0].completedProjects.toString());
       }
     } catch (e) {
       print(e.toString());

@@ -11,7 +11,8 @@ class GetAllProjectService {
   Future<Response> getAllProject(pageNo) async {
     var id = sessionlog.getString('userId');
 
-    print(orginalApi.baseUrl + "AdminController/getall_project/$id");
+    print(orginalApi.baseUrl +
+        "AdminController/getall_project/$id?pageNo=$pageNo");
     try {
       Response response =
           await dio.get('AdminController/getall_project/$id?pageNo=$pageNo');
