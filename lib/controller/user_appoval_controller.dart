@@ -18,6 +18,7 @@ class UserApprovalController extends GetxController {
       if (response.statusCode == 200) {
         getUserApprovalModel.value =
             GetUserApprovalModel.fromJson(response.data);
+        print(getUserApprovalModel.value!.data!.length);
 
         isLoading.value = false;
       }

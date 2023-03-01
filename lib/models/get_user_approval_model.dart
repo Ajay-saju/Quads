@@ -27,27 +27,48 @@ class GetUserApprovalModel {
 class Data {
   int? slNo;
   String? id;
-  String? fullName;
-  String? email;
-  String? phone;
+  String? userId;
+  String? projectId;
+  String? material;
+  String? quantity;
+  String? caption;
+  String? adminApproval;
+  String? addedOn;
 
-  Data({this.slNo, this.id, this.fullName, this.email, this.phone});
+  Data(
+      {this.slNo,
+      this.id,
+      this.userId,
+      this.projectId,
+      this.material,
+      this.quantity,
+      this.caption,
+      this.adminApproval,
+      this.addedOn});
 
   Data.fromJson(Map<String, dynamic> json) {
     slNo = json['sl_no'];
     id = json['id'];
-    fullName = json['full_name'];
-    email = json['email'];
-    phone = json['phone'];
+    userId = json['user_id'];
+    projectId = json['project_id'];
+    material = json['material'];
+    quantity = json['quantity'];
+    caption = json['caption'];
+    adminApproval = json['admin_approval'];
+    addedOn = json['added_on'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['sl_no'] = slNo;
     data['id'] = id;
-    data['full_name'] = fullName;
-    data['email'] = email;
-    data['phone'] = phone;
+    data['user_id'] = userId;
+    data['project_id'] = projectId;
+    data['material'] = material;
+    data['quantity'] = quantity;
+    data['caption'] = caption;
+    data['admin_approval'] = adminApproval;
+    data['added_on'] = addedOn;
     return data;
   }
 }

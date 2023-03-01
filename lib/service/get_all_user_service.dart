@@ -8,7 +8,7 @@ class GetAllUserService {
 
   Future<Response> getAllUsers() async {
     try {
-      Response response = await dio.get('AdminController/getall_user');
+      Response response = await dio.get('AdminController/getall_user?pageNo=1');
       return response;
     } on DioError catch (e) {
       print(e.message);
