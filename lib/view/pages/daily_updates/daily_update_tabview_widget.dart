@@ -58,7 +58,13 @@ class _DailyUpdateTabViewState extends State<DailyUpdateTabView> {
               return null;
             },
           ),
+
+        
         ),
+        AppSize.kSizedBox20h,
+        Row(children: [
+          Text('Choose file'),Spacer()
+        ],)
       ],
     );
   }
