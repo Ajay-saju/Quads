@@ -1,5 +1,4 @@
 // ignore_for_file: unrelated_type_equality_checks
-
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
@@ -55,8 +54,8 @@ class _UserApprovalScreenState extends State<UserApprovalScreen> {
                           )
                         : SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: createDataTable(userApprovalController
-                                .getUserApprovalModel.value!.data),
+                            child: createDataTable(
+                                userApprovalController.userApprovalData),
                           )),
               );
       }),

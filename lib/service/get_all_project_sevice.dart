@@ -14,8 +14,7 @@ class GetAllProjectService {
     print(orginalApi.baseUrl +
         "AdminController/getall_project/$id?pageNo=$pageNo");
     try {
-      Response response =
-          await dio.get('AdminController/getall_project/$id?pageNo=$pageNo');
+      Response response = await dio.get('AdminController/getall_project/$id');
       return response;
     } on DioError catch (e) {
       print(e.message);

@@ -1,15 +1,38 @@
 class GetUserApprovalModel {
   String? status;
+  String? resultCount;
+  String? currentPage;
+  String? firstbtn;
+  int? prev;
+  String? page1;
+  String? next;
+  String? last;
   List<Data>? data;
 
-  GetUserApprovalModel({this.status, this.data});
+  GetUserApprovalModel(
+      {this.status,
+      this.resultCount,
+      this.currentPage,
+      this.firstbtn,
+      this.prev,
+      this.page1,
+      this.next,
+      this.last,
+      this.data});
 
   GetUserApprovalModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    resultCount = json['resultCount'];
+    currentPage = json['currentPage'];
+    firstbtn = json['firstbtn'];
+    prev = json['prev'];
+    page1 = json['page1'];
+    next = json['next'];
+    last = json['last'];
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(new Data.fromJson(v));
       });
     }
   }
@@ -17,6 +40,13 @@ class GetUserApprovalModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
+    data['resultCount'] = resultCount;
+    data['currentPage'] = currentPage;
+    data['firstbtn'] = firstbtn;
+    data['prev'] = prev;
+    data['page1'] = page1;
+    data['next'] = next;
+    data['last'] = last;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -27,48 +57,27 @@ class GetUserApprovalModel {
 class Data {
   int? slNo;
   String? id;
-  String? userId;
-  String? projectId;
-  String? material;
-  String? quantity;
-  String? caption;
-  String? adminApproval;
-  String? addedOn;
+  String? fullName;
+  String? email;
+  String? phone;
 
-  Data(
-      {this.slNo,
-      this.id,
-      this.userId,
-      this.projectId,
-      this.material,
-      this.quantity,
-      this.caption,
-      this.adminApproval,
-      this.addedOn});
+  Data({this.slNo, this.id, this.fullName, this.email, this.phone});
 
   Data.fromJson(Map<String, dynamic> json) {
     slNo = json['sl_no'];
     id = json['id'];
-    userId = json['user_id'];
-    projectId = json['project_id'];
-    material = json['material'];
-    quantity = json['quantity'];
-    caption = json['caption'];
-    adminApproval = json['admin_approval'];
-    addedOn = json['added_on'];
+    fullName = json['full_name'];
+    email = json['email'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['sl_no'] = slNo;
     data['id'] = id;
-    data['user_id'] = userId;
-    data['project_id'] = projectId;
-    data['material'] = material;
-    data['quantity'] = quantity;
-    data['caption'] = caption;
-    data['admin_approval'] = adminApproval;
-    data['added_on'] = addedOn;
+    data['full_name'] = fullName;
+    data['email'] = email;
+    data['phone'] = phone;
     return data;
   }
 }

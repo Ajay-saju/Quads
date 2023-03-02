@@ -8,7 +8,7 @@ class UserApprovalService {
 
   Future<Response> getUserApproval() async {
     try {
-      Response response = await dio.get('AdminController/getRequest_approval/1');
+      Response response = await dio.get('AdminController/get_userApproval?pageNo=1');
       return response;
     } on DioError catch (e) {
       print(e.message);

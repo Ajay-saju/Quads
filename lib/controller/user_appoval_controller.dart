@@ -10,6 +10,7 @@ class UserApprovalController extends GetxController {
   var isLoading = true.obs;
 
   Rx<GetUserApprovalModel?> getUserApprovalModel = GetUserApprovalModel().obs;
+  var userApprovalData = [].obs;
 
   Future getAllApprovals() async {
     UserApprovalService userApprovalService = UserApprovalService();
@@ -18,8 +19,8 @@ class UserApprovalController extends GetxController {
       if (response.statusCode == 200) {
         getUserApprovalModel.value =
             GetUserApprovalModel.fromJson(response.data);
+        userApprovalData.value = getUserApprovalModel.value!.data!.toList();
         print(getUserApprovalModel.value!.data!.length);
-
         isLoading.value = false;
       }
     } catch (e) {

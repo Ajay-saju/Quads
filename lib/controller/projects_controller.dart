@@ -69,19 +69,20 @@ class ProjectsController extends GetxController {
 
   GetAllProjectService getAllProjectService = GetAllProjectService();
   Future getAllProjects(pageNO) async {
-    // isLoading.value = true;
+    isLoading.value = true;
     // var isLoading = true.obs;
     try {
       var response = await getAllProjectService.getAllProject(pageNO);
       if (response.statusCode == 200) {
         getAllProjectsModel.value = GetAllProjects.fromJson(response.data);
-        if (pageNO == '1') {
-          projetectData.value = getAllProjectsModel.value.data!.toList();
-          print(projetectData.value.length);
-        } else {
-          // ignore: invalid_use_of_protected_member
-          projetectData.value.addAll(getAllProjectsModel.value.data!.toList());
-        }
+        print(getAllProjectsModel.value.data!.length);
+        // if (pageNO == '1') {
+        //   projetectData.value = getAllProjectsModel.value.data!.toList();
+        //   print(projetectData.value.length);
+        // } else {
+        //   // ignore: invalid_use_of_protected_member
+        //   projetectData.value.addAll(getAllProjectsModel.value.data!.toList());
+        // }
         isLoading.value = false;
       }
     } catch (e) {
