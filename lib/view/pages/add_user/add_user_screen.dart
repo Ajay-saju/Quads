@@ -47,11 +47,18 @@ class _AddUserScreenState extends State<AddUserScreen> {
                         child: const Text('Add User'),
                       ),
                       AppSize.kSizedBox20h,
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: createDataTable(
-                            addUserController.getAllUsersModel.value.data),
-                      )
+
+                      PaginatedDataTable(
+                          columns: createColumns(),
+                          source: AddUserDatatable(
+                              addUserData: addUserController
+                                  .getAllUsersModel.value.data))
+
+                      // SingleChildScrollView(
+                      //   scrollDirection: Axis.horizontal,
+                      //   child: createDataTable(
+                      //       addUserController.getAllUsersModel.value.data),
+                      // )
                     ],
                   ),
                 )),
@@ -95,4 +102,45 @@ class _AddUserScreenState extends State<AddUserScreen> {
       const DataColumn(label: Text('Delete')),
     ];
   }
+}
+
+class AddUserDatatable extends DataTableSource {
+  // ignore: prefer_typing_uninitialized_variables
+  final addUserData;
+
+  AddUserDatatable({required this.addUserData});
+  final addUserController = Get.find<AddUserController>();
+
+  @override
+  DataRow? getRow(int index) {
+    return DataRow.byIndex(cells: [
+      DataCell(Text(addUserData[index].slNo.toString())),
+      DataCell(Text(addUserData[index].fullName)),
+      DataCell(Text(addUserData[index].email)),
+      DataCell(Text(addUserData[index].phone)),
+      DataCell(Text(addUserData[index].accType ?? '')),
+      DataCell(ElevatedButton(
+        onPressed: () {},
+        child: const Text('Edit'),
+      )),
+      DataCell(ElevatedButton(
+        onPressed: () {
+          addUserController.deleteUser(addUserData[index].id);
+        },
+        child: const Text('Delete'),
+      )),
+    ]);
+  }
+
+  @override
+  // TODO: implement isRowCountApproximate
+  bool get isRowCountApproximate => false;
+
+  @override
+  // TODO: implement rowCount
+  int get rowCount => addUserData.length;
+
+  @override
+  // TODO: implement selectedRowCount
+  int get selectedRowCount => 0;
 }
