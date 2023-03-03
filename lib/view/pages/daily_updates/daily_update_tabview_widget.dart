@@ -21,7 +21,8 @@ class _DailyUpdateTabViewState extends State<DailyUpdateTabView> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    dailyUpdateController.getCurrentDate();
+    final date = dailyUpdateController.getCurrentDate();
+    // dailyUpdateController.getDailyUpdates(date);
   }
 
   @override
@@ -36,6 +37,10 @@ class _DailyUpdateTabViewState extends State<DailyUpdateTabView> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextFormField(
               controller: dailyUpdateController.dateController,
+              onChanged: (value) {
+                print(value);
+                dailyUpdateController.getDailyUpdates(value);
+              },
               readOnly: true,
               decoration: InputDecoration(
                 errorBorder: OutlineInputBorder(
@@ -90,7 +95,7 @@ class _DailyUpdateTabViewState extends State<DailyUpdateTabView> {
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextFormField(
-              decoration: InputDecoration(label: Text('Caption')),
+              decoration: const InputDecoration(label: Text('Caption')),
             ),
           ),
           AppSize.kSizedBox20h,
@@ -113,6 +118,9 @@ class _DailyUpdateTabViewState extends State<DailyUpdateTabView> {
         selectedDate = picked;
         dailyUpdateController.dateController.text =
             DateFormat('dd-MM-yyyy').format(selectedDate!);
+        final dateForApi = DateFormat('yyyy-MM-dd').format(selectedDate!);
+        print(dateForApi);
+        dailyUpdateController.getDailyUpdates(dateForApi);
       });
     }
   }
