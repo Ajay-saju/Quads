@@ -14,26 +14,12 @@ class ProjectsController extends GetxController {
   final nameController = TextEditingController();
   final addressController = TextEditingController();
   final cityController = TextEditingController();
-
   var isLoading = true.obs;
   var isLoadingMore = false.obs;
-
   var projetectData = [].obs;
 
   ScrollController controller = ScrollController();
   var listLength = 10.obs;
-
-  // addItems() async {
-  //   controller.addListener(() {
-  //     if (controller.position.maxScrollExtent == controller.position.pixels) {
-  //       for (int i = 0; i < 2; i++) {
-  //         listLength++;
-  //         list.add(Model(name: (listLength).toString()));
-  //         update();
-  //       }
-  //     }
-  //   });
-  // }
 
   Future createNewUser(
       {required String name,

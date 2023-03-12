@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:quads/models/get_all_users_model.dart';
 import 'package:quads/service/delete_user_service.dart';
@@ -9,11 +11,11 @@ class AddUserController extends GetxController {
 
   Rx<GetAllUsers> getAllUsersModel = GetAllUsers().obs;
 
-  Future getAllUsersDetails() async {
+  Future getAllUsersDetails(pageNo) async {
     GetAllUserService getAllUserService = GetAllUserService();
 
     try {
-      var response = await getAllUserService.getAllUsers();
+      var response = await getAllUserService.getAllUsers(pageNo);
       if (response.statusCode == 200) {
         getAllUsersModel.value = GetAllUsers.fromJson(response.data);
         isLoading.value = false;
@@ -24,14 +26,14 @@ class AddUserController extends GetxController {
     update();
   }
 
-  Future deleteUser(String id) async {
+  Future deleteUser({required String id,required String pageNo}) async {
     DialogHelper.showLoading();
     DeleteUserService deleteUserService = DeleteUserService();
 
     try {
       var response = await deleteUserService.deleteUser(id);
       if (response.statusCode == 200) {
-        getAllUsersDetails();
+        getAllUsersDetails(pageNo);
         DialogHelper.hideLoading();
       }
     } catch (e) {

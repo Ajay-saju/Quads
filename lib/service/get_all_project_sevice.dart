@@ -8,7 +8,7 @@ class GetAllProjectService {
   final dio = Dio(BaseOptions(
       baseUrl: orginalApi.baseUrl, responseType: ResponseType.json));
 
-  Future<Response> getAllProject(pageNo) async {
+  Future<Response>  getAllProject(pageNo) async {
     var id = sessionlog.getString('userId');
 
     print(orginalApi.baseUrl +

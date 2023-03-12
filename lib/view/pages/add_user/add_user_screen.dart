@@ -17,7 +17,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    addUserController.getAllUsersDetails();
+    addUserController.getAllUsersDetails('1');
   }
 
   @override
@@ -49,7 +49,16 @@ class _AddUserScreenState extends State<AddUserScreen> {
                       AppSize.kSizedBox20h,
 
                       PaginatedDataTable(
-                          columns: createColumns(),
+                        // key:const Key('row-0'),
+                          columns: const [
+                            DataColumn(label: Text('Sl No')),
+                            DataColumn(label: Text('Full Name')),
+                            DataColumn(label: Text('Email')),
+                            DataColumn(label: Text('Phone')),
+                            DataColumn(label: Text('Acc_Type')),
+                            DataColumn(label: Text('Edit')),
+                            DataColumn(label: Text('Delete')),
+                          ],
                           source: AddUserDatatable(
                               addUserData: addUserController
                                   .getAllUsersModel.value.data))
@@ -67,45 +76,46 @@ class _AddUserScreenState extends State<AddUserScreen> {
     );
   }
 
-  createDataTable(data) {
-    return DataTable(
-        columns: createColumns(),
-        rows: List<DataRow>.generate(
-            data.length,
-            (index) => DataRow(cells: [
-                  DataCell(Text(data[index].slNo.toString())),
-                  DataCell(Text(data[index].fullName)),
-                  DataCell(Text(data[index].email)),
-                  DataCell(Text(data[index].phone)),
-                  DataCell(Text(data[index].accType ?? '')),
-                  DataCell(ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Edit'),
-                  )),
-                  DataCell(ElevatedButton(
-                    onPressed: () {
-                      addUserController.deleteUser(data[index].id);
-                    },
-                    child: const Text('Delete'),
-                  )),
-                ])));
-  }
+  // createDataTable(data) {
+  //   return DataTable(
+  //       columns: createColumns(),
+  //       rows: List<DataRow>.generate(
+  //           data.length,
+  //           (index) => DataRow(cells: [
+  //                 DataCell(Text(data[index].slNo.toString())),
+  //                 DataCell(Text(data[index].fullName)),
+  //                 DataCell(Text(data[index].email)),
+  //                 DataCell(Text(data[index].phone)),
+  //                 DataCell(Text(data[index].accType ?? '')),
+  //                 DataCell(ElevatedButton(
+  //                   onPressed: () {},
+  //                   child: const Text('Edit'),
+  //                 )),
+  //                 DataCell(ElevatedButton(
+  //                   onPressed: () {
+  //                     addUserController.deleteUser(
+  //                         pageNo: data[index].id.toString(), id: '1');
+  //                   },
+  //                   child: const Text('Delete'),
+  //                 )),
+  //               ])));
+  // }
 
-  List<DataColumn> createColumns() {
-    return [
-      const DataColumn(label: Text('Sl No')),
-      const DataColumn(label: Text('Full Name')),
-      const DataColumn(label: Text('Email')),
-      const DataColumn(label: Text('Phone')),
-      const DataColumn(label: Text('Acc_Type')),
-      const DataColumn(label: Text('Edit')),
-      const DataColumn(label: Text('Delete')),
-    ];
-  }
+//   List<DataColumn> createColumns() {
+//     return [
+//       const DataColumn(label: Text('Sl No')),
+//       const DataColumn(label: Text('Full Name')),
+//       const DataColumn(label: Text('Email')),
+//       const DataColumn(label: Text('Phone')),
+//       const DataColumn(label: Text('Acc_Type')),
+//       const DataColumn(label: Text('Edit')),
+//       const DataColumn(label: Text('Delete')),
+//     ];
+//   }
 }
 
 class AddUserDatatable extends DataTableSource {
-  // ignore: prefer_typing_uninitialized_variables
+  
   final addUserData;
 
   AddUserDatatable({required this.addUserData});
@@ -113,7 +123,9 @@ class AddUserDatatable extends DataTableSource {
 
   @override
   DataRow? getRow(int index) {
-    return DataRow.byIndex(cells: [
+    return DataRow(
+      // key: Key(addUserData[index].id),
+      cells: [
       DataCell(Text(addUserData[index].slNo.toString())),
       DataCell(Text(addUserData[index].fullName)),
       DataCell(Text(addUserData[index].email)),
@@ -125,7 +137,8 @@ class AddUserDatatable extends DataTableSource {
       )),
       DataCell(ElevatedButton(
         onPressed: () {
-          addUserController.deleteUser(addUserData[index].id);
+          addUserController.deleteUser(
+              id: addUserData[index].id.toString(), pageNo: '1');
         },
         child: const Text('Delete'),
       )),
