@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quads/view/pages/daily_updates/daily_update_tabview_widget.dart';
+import 'package:quads/view/pages/party/party_tabview.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectName;
-  const ProjectDetailsScreen({super.key, required this.projectName});
+  
+  const ProjectDetailsScreen(
+      {super.key, required this.projectName});
 
   @override
   State<ProjectDetailsScreen> createState() => _ProjectDetailsScreenState();
@@ -29,8 +32,8 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
           ]),
         ),
         body: TabBarView(children: [
-          DailyUpdateTabView(),
-          Text('one'),
+        const  DailyUpdateTabView(),
+          PartyTabView(),
           Text('one'),
           Text('one'),
           Text('one'),
@@ -41,5 +44,3 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
     );
   }
 }
-
-
