@@ -101,40 +101,40 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     );
   }
 
-  DataTable createDataTable(data) {
-    return DataTable(
-        columns: _createColumns(),
-        rows: List<DataRow>.generate(
-            projectsController.isLoadingMore.value ? data.length : data.length,
-            (index) {
-          if (index < data.length) {
-            return DataRow(cells: [
-              DataCell(Text(data[index].projectName),
-                  onTap: () => Get.to(ProjectDetailsScreen(
-                        projectName: data[index].projectName,
-                      ))),
-              DataCell(Text(data[index].address ?? ''),
-                  onTap: () => Get.to(ProjectDetailsScreen(
-                        projectName: data[index].projectName,
-                      ))),
-              DataCell(Text(data[index].city ?? ''),
-                  onTap: () => Get.to(ProjectDetailsScreen(
-                        projectName: data[index].projectName,
-                      ))),
-              DataCell(Text(data[index].createdOn),
-                  onTap: () => Get.to(ProjectDetailsScreen(
-                        projectName: data[index].projectName,
-                      )))
-            ]);
-          } else {
-            return const DataRow(cells: [
-              DataCell(Center(
-                child: CircularProgressIndicator(),
-              ))
-            ]);
-          }
-        }));
-  }
+  // DataTable createDataTable(data) {
+  //   return DataTable(
+  //       columns: _createColumns(),
+  //       rows: List<DataRow>.generate(
+  //           projectsController.isLoadingMore.value ? data.length : data.length,
+  //           (index) {
+  //         if (index < data.length) {
+  //           return DataRow(cells: [
+  //             DataCell(Text(data[index].projectName),
+  //                 onTap: () => Get.to(ProjectDetailsScreen(
+  //                       projectName: data[index].projectName,
+  //                     ))),
+  //             DataCell(Text(data[index].address ?? ''),
+  //                 onTap: () => Get.to(ProjectDetailsScreen(
+  //                       projectName: data[index].projectName,
+  //                     ))),
+  //             DataCell(Text(data[index].city ?? ''),
+  //                 onTap: () => Get.to(ProjectDetailsScreen(
+  //                       projectName: data[index].projectName,
+  //                     ))),
+  //             DataCell(Text(data[index].createdOn),
+  //                 onTap: () => Get.to(ProjectDetailsScreen(
+  //                       projectName: data[index].projectName,
+  //                     )))
+  //           ]);
+  //         } else {
+  //           return const DataRow(cells: [
+  //             DataCell(Center(
+  //               child: CircularProgressIndicator(),
+  //             ))
+  //           ]);
+  //         }
+  //       }));
+  // }
 
   List<DataColumn> _createColumns() {
     return [
@@ -155,19 +155,19 @@ class CustomeDataTableSourse extends DataTableSource {
       DataCell(Text(datas[index].projectName.toString()),
           onTap: () => Get.to(ProjectDetailsScreen(
                 projectName: datas[index].projectName,
+                projectId: datas[index].id,
               ))),
       DataCell(Text(datas[index].address ?? ''),
           onTap: () => Get.to(ProjectDetailsScreen(
-                projectName: datas[index].projectName,
-              ))),
+              projectName: datas[index].projectName,
+              projectId: datas[index].id))),
       DataCell(Text(datas[index].city ?? ''),
           onTap: () => Get.to(ProjectDetailsScreen(
-                projectName: datas[index].projectName,
-              ))),
+              projectName: datas[index].projectName,
+              projectId: datas[index].id))),
       DataCell(Text(datas[index].createdOn), onTap: () {
         Get.to(ProjectDetailsScreen(
-          projectName: datas[index].projectName,
-        ));
+            projectName: datas[index].projectName, projectId: datas[index].id));
       })
     ]);
   }

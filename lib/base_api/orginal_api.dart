@@ -1,3 +1,3 @@
 class OrginalApi {
-  String baseUrl = 'https://api.bigwave.in/construction/';
+  String baseUrl = 'https://api.bigwave.in/test_quads/';
 }

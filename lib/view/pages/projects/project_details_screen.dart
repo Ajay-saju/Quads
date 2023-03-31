@@ -4,9 +4,10 @@ import 'package:quads/view/pages/party/party_tabview.dart';
 
 class ProjectDetailsScreen extends StatefulWidget {
   final String projectName;
+  final String projectId;
   
   const ProjectDetailsScreen(
-      {super.key, required this.projectName});
+      {super.key, required this.projectName, required this.projectId});
 
   @override
   State<ProjectDetailsScreen> createState() => _ProjectDetailsScreenState();
@@ -33,7 +34,7 @@ class _ProjectDetailsScreenState extends State<ProjectDetailsScreen> {
         ),
         body: TabBarView(children: [
         const  DailyUpdateTabView(),
-          PartyTabView(),
+          PartyTabView(projectId: widget.projectId,),
           Text('one'),
           Text('one'),
           Text('one'),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:quads/models/get_all_users_model.dart';
 import 'package:quads/service/delete_user_service.dart';
