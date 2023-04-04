@@ -4,15 +4,15 @@ import 'package:quads/main.dart';
 
 class AddPartyService {
   static OrginalApi orginalApi = OrginalApi();
-  // final dio = Dio(BaseOptions(
-  //     baseUrl: orginalApi.baseUrl, responseType: ResponseType.json));
-  final dio = Dio(BaseOptions(responseType: ResponseType.json));
+  final dio = Dio(BaseOptions(
+      baseUrl: orginalApi.baseUrl, responseType: ResponseType.json));
 
   Future<Response> addparty(data) async {
+    print(data);
+     print(orginalApi.baseUrl + "PartyController/add_party");
     try {
-      Response response = await dio.post(
-          'https://api.bigwave.in/test_quads/PartyController/add_party',
-          data: data);
+      Response response =
+          await dio.post('PartyController/add_party', data: data);
       return response;
     } on DioError catch (e) {
       print(e.message);

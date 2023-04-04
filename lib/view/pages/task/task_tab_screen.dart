@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:quads/controller/task/task_controller.dart';
+import 'package:quads/view/constants/app_constants.dart';
+import 'package:quads/view/pages/task/add_task_screen.dart';
 
 class TaskTabView extends StatefulWidget {
   const TaskTabView({super.key});
@@ -19,7 +17,7 @@ class _TaskTabViewState extends State<TaskTabView> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return taskTabViewController.isLoading.value == true
+      return taskTabViewController.isLoading.value == false
           ? const Center(
               child: CircularProgressIndicator(
                 color: Colors.black87,
@@ -29,21 +27,28 @@ class _TaskTabViewState extends State<TaskTabView> {
           : Center(
               child: Column(
                 children: [
-                  PaginatedDataTable(
-                      columns: const [
-                        DataColumn(label: Text('Sl No')),
-                        DataColumn(label: Text('Task Name')),
-                        DataColumn(label: Text('Starts')),
-                        DataColumn(label: Text('Ends')),
-                        DataColumn(label: Text('Status')),
-                        DataColumn(label: Text('Progress')),
-                        DataColumn(label: Text('Time left')),
-                        DataColumn(label: Text('Tagged users')),
-                        DataColumn(label: Text('Edit')),
-                      ],
-                      source: CustomeTaskDataTableSourse(
-                          data:
-                              taskTabViewController.getAllTaskModel.value.data))
+                  AppSize.kSizedBox10h,
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.to(const AddTaskScreen());
+                      },
+                      child: Text('Add Task')),
+                  AppSize.kSizedBox20h,
+                  //   PaginatedDataTable(
+                  //       columns: const [
+                  //         DataColumn(label: Text('Sl No')),
+                  //         DataColumn(label: Text('Task Name')),
+                  //         DataColumn(label: Text('Starts')),
+                  //         DataColumn(label: Text('Ends')),
+                  //         DataColumn(label: Text('Status')),
+                  //         DataColumn(label: Text('Progress')),
+                  //         DataColumn(label: Text('Time left')),
+                  //         DataColumn(label: Text('Tagged users')),
+                  //         DataColumn(label: Text('Edit')),
+                  //       ],
+                  //       source: CustomeTaskDataTableSourse(
+                  //           data:
+                  //               taskTabViewController.getAllTaskModel.value.data))
                 ],
               ),
             );
