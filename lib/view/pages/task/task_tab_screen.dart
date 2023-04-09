@@ -17,7 +17,7 @@ class _TaskTabViewState extends State<TaskTabView> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return taskTabViewController.isLoading.value == false
+      return taskTabViewController.isLoading.value == true
           ? const Center(
               child: CircularProgressIndicator(
                 color: Colors.black87,

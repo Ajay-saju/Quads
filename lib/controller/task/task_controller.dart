@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:quads/main.dart';
-import 'package:quads/models/task/get_all_task_model.dart';
+// import 'package:quads/models/task/get_all_task_model.dart';
+import 'package:quads/models/task/select_users_model';
 import 'package:quads/service/task/get_all_task_service.dart';
 
 class TaskTabController extends GetxController {
@@ -13,17 +14,21 @@ class TaskTabController extends GetxController {
   }
 
   var isLoading = true.obs;
-  Rx<GetAllTaskModel> getAllTaskModel = GetAllTaskModel().obs;
+  List<Data> items = [];
+  // Rx<GetAllTaskModel> getAllTaskModel = GetAllTaskModel().obs;
+  // Rx<SelectUserModel> selectUserModel = SelectUserModel().obs;
   final getAllTaskService = GetAllTaskService();
+ 
+
   Future getAllTask({
     required String projectId,
     required String status,
     required String myTask,
     required String searchTask,
   }) async {
-     var id = sessionlog.getString('userId');
+    var id = sessionlog.getString('userId');
     final data = {
-      "projectId":projectId,
+      "projectId": projectId,
       "userId": id,
       "status": "ALL",
       "progress": "ALL",
